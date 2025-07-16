@@ -53,7 +53,10 @@ export async function POST(request: NextRequest) {
         }
 
         if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
-            return NextResponse.json({ error: "Invalid file type (only images and PDFs are supported)" }, { status: 400 });
+            return NextResponse.json(
+                { error: "Invalid file type (only images and PDFs are supported)" }, 
+                { status: 400 }
+            );
         }
 
         const buffer = await file.arrayBuffer();
@@ -71,7 +74,7 @@ export async function POST(request: NextRequest) {
             file: fileBuffer,
             fileName: uniqueFileName,
             folder: folderPath,
-            useUniqueFileName: true
+            useUniqueFileName: false
         });
 
         const fileData = {
