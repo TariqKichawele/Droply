@@ -1,7 +1,7 @@
 'use client';
 
 import type { File as FileType } from '@/lib/db/schema';
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import {
@@ -47,7 +47,7 @@ const FileList = ({
     const [emptyTrashModalOpen, setEmptyTrashModalOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState<FileType | null>(null);
 
-    const fetchFiles = async () => {
+    const fetchFiles = useCallback(async () => {
         setLoading(true);
 
         try {
@@ -67,11 +67,11 @@ const FileList = ({
         } finally {
             setLoading(false);
         }
-    }
+    }, [userId, currentFolder]);
 
     useEffect(() => {
         fetchFiles();
-    }, [userId, refreshTrigger, currentFolder]);
+    }, [userId, refreshTrigger, currentFolder, fetchFiles]);
 
     const filteredFiles = useMemo(() => {
         switch (activeTab) {

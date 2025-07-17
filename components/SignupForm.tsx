@@ -56,7 +56,7 @@ const SignupForm = () => {
         } catch (error: unknown) {
             setIsSubmitting(false);
             setAuthError(
-                (error as any)?.errors?.[0]?.message ||
+                (error as { errors?: { message: string }[] })?.errors?.[0]?.message ||
                   "An error occurred during sign-up. Please try again."
             );
         } finally {
@@ -83,10 +83,10 @@ const SignupForm = () => {
                 console.error("Verification failed: ", result);
                 setVerificationError("Invalid verification code. Please try again.");
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             setIsSubmitting(false);
             setVerificationError(
-                error.errors?.[0]?.message ||
+                (error as { errors?: { message: string }[] })?.errors?.[0]?.message ||
                   "An error occurred during verification. Please try again."
             );
         } finally {
