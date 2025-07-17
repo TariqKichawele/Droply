@@ -7,6 +7,7 @@ import { Tabs, Tab } from '@heroui/tabs';
 import { FileText, FileUp, User } from 'lucide-react';
 import FileUploadForm from "@/components/FileUploadForm";
 import FileList from './FileList';
+import UserProfile from './UserProfile';
 
 interface DashboardContentProps {
     userId: string;
@@ -41,7 +42,7 @@ const DashboardContent = ({ userId, userName }: DashboardContentProps) => {
   return (
     <>
         <div className="mb-8">
-            <h2 className="text-4xl font-bold text-default-900">
+            <h1 className="font-heading text-default-900">
                 Hi,{" "}
                 <span className="text-primary">
                     {userName?.length > 10
@@ -49,9 +50,9 @@ const DashboardContent = ({ userId, userName }: DashboardContentProps) => {
                     : userName?.split(" ")[0] || "there"}
                 </span>
                 !
-            </h2>
-            <p className="text-default-600 mt-2 text-lg">
-            Your images are waiting for you.
+            </h1>
+            <p className="text-body-large text-default-600 mt-2">
+                Your images/files are waiting for you.
             </p>
         </div>
 
@@ -72,7 +73,7 @@ const DashboardContent = ({ userId, userName }: DashboardContentProps) => {
                 title={
                     <div className="flex items-center gap-3">
                         <FileText className="h-5 w-5" />
-                        <span className="font-medium">My Files</span>
+                        <span className="font-body font-medium">My Files</span>
                     </div>
                 }
             >
@@ -81,7 +82,7 @@ const DashboardContent = ({ userId, userName }: DashboardContentProps) => {
                     <Card className="border border-default-200 bg-default-50 shadow-sm hover:shadow-md transition-shadow">
                         <CardHeader className="flex gap-3">
                             <FileUp className="h-5 w-5 text-primary" />
-                            <h2 className="text-xl font-semibold">Upload</h2>
+                            <h3 className="font-heading">Upload</h3>
                         </CardHeader>
                         <CardBody>
                             <FileUploadForm
@@ -97,7 +98,7 @@ const DashboardContent = ({ userId, userName }: DashboardContentProps) => {
                     <Card className="border border-default-200 bg-default-50 shadow-sm hover:shadow-md transition-shadow">
                         <CardHeader className="flex gap-3">
                             <FileText className="h-5 w-5 text-primary" />
-                            <h2 className="text-xl font-semibold">Your Files</h2>
+                            <h3 className="font-heading">Your Files</h3>
                         </CardHeader>
                         <CardBody>
                             <FileList
@@ -116,12 +117,12 @@ const DashboardContent = ({ userId, userName }: DashboardContentProps) => {
                 title={
                     <div className="flex items-center gap-3">
                         <User className="h-5 w-5" />
-                        <span className="font-medium">Profile</span>
+                        <span className="font-body font-medium">Profile</span>
                     </div>
                 }
             >
                 <div className="mt-8">
-                    UserProfile
+                    <UserProfile />
                 </div>
             </Tab>
         </Tabs>

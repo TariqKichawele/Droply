@@ -22,14 +22,14 @@ const FileActions = ({
   onDownload
 }: FileActionsProps) => {
   return (
-    <div className="flex flex-wrap gap-2 justify-end">
+    <div className="flex flex-col gap-2 items-end">
       {/* Download button */}
       {!file.isTrash && !file.isFolder && (
         <Button
           variant="flat"
           size="sm"
           onClick={() => onDownload(file)}
-          className="min-w-0 px-2"
+          className="min-w-0 px-2 w-full max-w-[120px]"
           startContent={<Download className="h-4 w-4" />}
         >
           <span className="hidden sm:inline">Download</span>
@@ -42,7 +42,7 @@ const FileActions = ({
           variant="flat"
           size="sm"
           onClick={() => onStar(file.id)}
-          className="min-w-0 px-2"
+          className="min-w-0 px-2 w-full max-w-[120px]"
           startContent={
             <Star
               className={`h-4 w-4 ${
@@ -64,7 +64,7 @@ const FileActions = ({
         variant="flat"
         size="sm"
         onClick={() => onTrash(file.id)}
-        className="min-w-0 px-2"
+        className="min-w-0 px-2 w-full max-w-[120px]"
         color={file.isTrash ? "success" : "default"}
         startContent={
           file.isTrash ? (
@@ -86,7 +86,7 @@ const FileActions = ({
           size="sm"
           color="danger"
           onClick={() => onDelete(file)}
-          className="min-w-0 px-2"
+          className="min-w-0 px-2 w-full max-w-[120px]"
           startContent={<X className="h-4 w-4" />}
         >
           <span className="hidden sm:inline">Remove</span>

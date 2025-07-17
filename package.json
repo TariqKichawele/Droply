@@ -22,6 +22,7 @@
     "@heroui/input": "^2.4.23",
     "@heroui/modal": "^2.2.20",
     "@heroui/progress": "^2.2.19",
+    "@heroui/react": "^2.8.1",
     "@heroui/system": "^2.4.19",
     "@heroui/table": "^2.2.23",
     "@heroui/tabs": "^2.2.20",
@@ -43,6 +44,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.60.0",
+    "react-hot-toast": "^2.5.2",
     "zod": "^4.0.5"
   },
   "devDependencies": {

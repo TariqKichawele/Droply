@@ -38,7 +38,7 @@ const FileTabs = ({
             title={
                 <div className="flex items-center gap-2 sm:gap-3">
                     <File className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="font-medium">All Files</span>
+                    <span className="font-body font-medium">All Files</span>
                     <Badge
                         variant="flat"
                         color="default"
@@ -55,7 +55,7 @@ const FileTabs = ({
             title={
                 <div className="flex items-center gap-2 sm:gap-3">
                     <Star className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="font-medium">Starred</span>
+                    <span className="font-body font-medium">Starred</span>
                     <Badge
                         variant="flat"
                         color="warning"
@@ -72,9 +72,9 @@ const FileTabs = ({
             title={
                 <div className="flex items-center gap-2 sm:gap-3">
                     <Trash className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="font-medium">Trash</span>
+                    <span className="font-body font-medium">Trash</span>
                     <Badge
-                        variant="solid"
+                        variant="flat"
                         color="danger"
                         size="sm"
                         aria-label={`${trashCount} files in trash`}

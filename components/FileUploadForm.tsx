@@ -1,4 +1,4 @@
-import { addToast } from '@heroui/toast';
+import toast from 'react-hot-toast';
 import React, { useRef, useState } from 'react'
 import axios from 'axios';
 import { Button } from "@heroui/button";
@@ -85,10 +85,8 @@ const FileUploadForm = ({
 
     const handleCreateFolder = async () => {
         if (!folderName.trim()) {
-            addToast({
-                title: "Invalid Folder Name",
-                description: "Please enter a name for the folder",
-                color: "danger",
+            toast.error("Please enter a name for the folder", {
+                duration: 4000,
             });
             return;
         }
@@ -101,10 +99,8 @@ const FileUploadForm = ({
                 parentId: currentFolder
             });
 
-            addToast({
-                title: "Folder Created",
-                description: `${folderName.trim()} folder created successfully`,
-                color: "success",
+            toast.success(`${folderName.trim()} folder created successfully`, {
+                duration: 4000,
             });
 
             setFolderName("");
@@ -117,10 +113,9 @@ const FileUploadForm = ({
 
         } catch (error) {
             console.error("Error creating folder:", error);
-            addToast({
-                title: "Error",
-                description: "Failed to create folder",
-            })
+            toast.error("Failed to create folder", {
+                duration: 4000,
+            });
         } finally {
             setCreatingFolder(false);
         }
@@ -153,10 +148,8 @@ const FileUploadForm = ({
                 }
             });
 
-            addToast({
-                title: "Upload Successful",
-                description: `${file.name} uploaded successfully`,
-                color: "success",
+            toast.success(`${file.name} uploaded successfully`, {
+                duration: 4000,
             });
 
             clearFile();
@@ -167,10 +160,8 @@ const FileUploadForm = ({
 
         } catch (error) {
             console.error("Error uploading file:", error);
-            addToast({
-                title: "Error",
-                description: "Failed to upload file",
-                color: "danger",
+            toast.error("Failed to upload file", {
+                duration: 4000,
             });
         } finally {
             setIsUploading(false);
@@ -303,38 +294,52 @@ const FileUploadForm = ({
 
         {/* Upload tips */}
         <div className="bg-default-100/5 p-4 rounded-lg">
-            <h4 className="text-sm font-medium mb-2">Tips</h4>
-            <ul className="text-xs text-default-600 space-y-1">
+            <h4 className="font-heading font-medium mb-2">Tips</h4>
+            <ul className="text-caption text-default-600 space-y-1">
             <li>• Images are private and only visible to you</li>
             <li>• Supported formats: JPG, PNG, GIF, WebP</li>
             <li>• Maximum file size: 5MB</li>
             </ul>
         </div>
 
+        {/* Folder Upload Instructions */}
+        <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+            <h4 className="font-heading font-medium mb-2 text-primary">📁 Uploading to Folders</h4>
+            <div className="text-caption text-default-600 space-y-1">
+                <p>To upload files into a folder:</p>
+                <ol className="ml-4 space-y-1">
+                    <li>1. Create a folder using &quot;New Folder&quot; button</li>
+                    <li>2. Click on the folder name to enter it</li>
+                    <li>3. Upload your files - they&apos;ll be saved in that folder</li>
+                    <li>4. Use breadcrumb navigation to go back to parent folders</li>
+                </ol>
+            </div>
+        </div>
+
         {/* Create Folder Modal */}
         <Modal
             isOpen={folderModalOpen}
             onOpenChange={setFolderModalOpen}
-            backdrop="blur"
+            backdrop="opaque"
             classNames={{
-                base: "border border-default-200 bg-default-5",
+                base: "border border-default-200 bg-white",
                 header: "border-b border-default-200",
                 footer: "border-t border-default-200",
+                backdrop: "bg-black/80 backdrop-blur-sm",
             }}
         >
             <ModalContent>
-                <ModalHeader className="flex gap-2 items-center">
+                <ModalHeader className="flex items-center justify-center gap-2">
                     <FolderPlus className="h-5 w-5 text-primary" />
-                    <span>New Folder</span>
+                    <span className="font-heading">New Folder</span>
                 </ModalHeader>
-                <ModalBody>
+                <ModalBody className="text-center">
                     <div className="space-y-4">
-                        <p className="text-sm text-default-600">
+                        <p className="text-body-small text-default-600">
                             Enter a name for your folder:
                         </p>
                         <Input
                             type="text"
-                            label="Folder Name"
                             placeholder="My Images"
                             value={folderName}
                             onChange={(e) => setFolderName(e.target.value)}
@@ -342,11 +347,12 @@ const FileUploadForm = ({
                         />
                     </div>
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter className="justify-center">
                     <Button
                         variant="flat"
                         color="default"
                         onClick={() => setFolderModalOpen(false)}
+                        className="border border-default-300"
                     >
                         Cancel
                     </Button>
@@ -356,6 +362,7 @@ const FileUploadForm = ({
                         isLoading={creatingFolder}
                         isDisabled={!folderName.trim()}
                         endContent={!creatingFolder && <ArrowRight className="h-4 w-4" />}
+                        className="border border-primary-300"
                     >
                         Create
                     </Button>

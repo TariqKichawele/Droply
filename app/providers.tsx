@@ -6,7 +6,7 @@ import { ImageKitProvider } from "imagekitio-next";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes";
 import { createContext, useContext } from "react";
-import { ToastProvider } from "@heroui/toast";
+import { Toaster } from "react-hot-toast";
 
 export interface ProvidersProps {
     children: React.ReactNode;
@@ -52,7 +52,26 @@ export function Providers({ children, themeProps }: ProvidersProps) {
                 urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || ""}
             >
                 <ImageKitAuthContext.Provider value={{ authenticate: authenticator }}>
-                    <ToastProvider placement="top-right" />
+                    <Toaster 
+                        position="top-right"
+                        toastOptions={{
+                            duration: 4000,
+                            className: '',
+                            style: {},
+                            success: {
+                                iconTheme: {
+                                    primary: '#10b981',
+                                    secondary: '#fff',
+                                },
+                            },
+                            error: {
+                                iconTheme: {
+                                    primary: '#ef4444',
+                                    secondary: '#fff',
+                                },
+                            },
+                        }}
+                    />
                     <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
                 </ImageKitAuthContext.Provider>
             </ImageKitProvider>

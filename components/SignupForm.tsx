@@ -53,10 +53,10 @@ const SignupForm = () => {
 
             await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
             setVerifying(true);
-        } catch (error: any) {
+        } catch (error: unknown) {
             setIsSubmitting(false);
             setAuthError(
-                error.errors?.[0]?.message ||
+                (error as any)?.errors?.[0]?.message ||
                   "An error occurred during sign-up. Please try again."
             );
         } finally {
@@ -284,6 +284,9 @@ const SignupForm = () => {
                         </p>
                     </div>
                 </div>
+
+                {/* Clerk CAPTCHA element */}
+                <div className="clerk-captcha"></div>
 
                 <Button
                     type="submit"

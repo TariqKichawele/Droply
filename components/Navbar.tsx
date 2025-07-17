@@ -13,6 +13,7 @@ import {
 import { Avatar } from "@heroui/avatar";
 import { Button } from "@heroui/button";
 import { useState, useEffect, useRef } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 interface SerializedUser {
   id: string;
@@ -129,20 +130,21 @@ export default function Navbar({ user }: NavbarProps) {
 
   return (
     <header
-      className={`bg-default-50 border-b border-default-200 sticky top-0 z-50 transition-shadow ${isScrolled ? "shadow-sm" : ""}`}
+      className={`bg-white border-b border-default-200 sticky top-0 z-50 transition-shadow ${isScrolled ? "shadow-sm" : ""}`}
     >
       <div className="container mx-auto py-3 md:py-4 px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 z-10">
             <CloudUpload className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-bold">Droply</h1>
+            <h1 className="text-xl font-heading font-bold">Droply</h1>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-4 items-center">
             {/* Show these buttons when user is signed out */}
             <SignedOut>
+              <ThemeToggle />
               <Link href="/sign-in">
                 <Button variant="flat" color="primary">
                   Sign In
@@ -165,6 +167,7 @@ export default function Navbar({ user }: NavbarProps) {
                     </Button>
                   </Link>
                 )}
+                <ThemeToggle />
                 <Dropdown>
                   <DropdownTrigger>
                     <Button
@@ -186,25 +189,30 @@ export default function Navbar({ user }: NavbarProps) {
                       </div>
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu aria-label="User actions">
+                  <DropdownMenu 
+                    aria-label="User actions"
+                    classNames={{
+                      base: "p-2 bg-white border border-default-200 shadow-lg",
+                      list: "gap-2"
+                    }}
+                  >
                     <DropdownItem
                       key="profile"
-                      description={userDetails.email || "View your profile"}
                       onClick={() => router.push("/dashboard?tab=profile")}
+                      className="py-2 px-3 rounded-lg"
                     >
                       Profile
                     </DropdownItem>
                     <DropdownItem
                       key="files"
-                      description="Manage your files"
                       onClick={() => router.push("/dashboard")}
+                      className="py-2 px-3 rounded-lg"
                     >
                       My Files
                     </DropdownItem>
                     <DropdownItem
                       key="logout"
-                      description="Sign out of your account"
-                      className="text-danger"
+                      className="text-danger py-2 px-3 rounded-lg"
                       color="danger"
                       onClick={handleSignOut}
                     >
@@ -218,6 +226,7 @@ export default function Navbar({ user }: NavbarProps) {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <SignedIn>
               <Avatar
                 name={userDetails.initials}
@@ -244,7 +253,7 @@ export default function Navbar({ user }: NavbarProps) {
           {/* Mobile Menu Overlay */}
           {isMobileMenuOpen && (
             <div
-              className="fixed inset-0 bg-black/20 z-40 md:hidden"
+              className="fixed inset-0 bg-black/60 z-40 md:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-hidden="true"
             />
@@ -253,7 +262,7 @@ export default function Navbar({ user }: NavbarProps) {
           {/* Mobile Menu */}
           <div
             ref={mobileMenuRef}
-            className={`fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-default-50 z-40 flex flex-col pt-20 px-6 shadow-xl transition-transform duration-300 ease-in-out ${
+            className={`fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-white border-l border-default-200 z-40 flex flex-col pt-20 px-6 shadow-xl transition-transform duration-300 ease-in-out ${
               isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
             } md:hidden`}
           >
@@ -318,7 +327,7 @@ export default function Navbar({ user }: NavbarProps) {
                     Profile
                   </Link>
                   <button
-                    className="py-2 px-3 text-left text-danger hover:bg-danger-50 rounded-md transition-colors mt-4"
+                    className="py-2 px-3 text-left text-danger hover:bg-danger-50 rounded-md transition-colors mt-4 border border-danger-300 w-fit"
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       handleSignOut();
