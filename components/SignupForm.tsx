@@ -167,9 +167,9 @@ const SignupForm = () => {
         );
     }
   return (
-    <Card className="w-full max-w-md border border-default-200 bg-default-50 shadow-xl">
+    <Card className="w-full max-w-lg border border-default-200 bg-default-50 shadow-xl rounded-xl">
         <CardHeader className="flex flex-col gap-1 items-center pb-2">
-            <h1 className="text-2xl font-bold text-default-900">
+            <h1 className="text-2xl font-bold text-default-900 w-full text-center">
                 Create Your Account
             </h1>
             <p className="text-default-500 text-center">

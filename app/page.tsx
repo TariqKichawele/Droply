@@ -26,14 +26,14 @@ export default function Home() {
               <div className="space-y-6 text-center lg:text-left">
                 <div>
                   <h1 className="font-heading text-default-900 leading-tight mb-4">
-                    Store your <span className="text-primary">images</span> with
+                    Store your <span className="text-primary">images/files</span> with
                     ease
                   </h1>
                   <p className="text-body-large text-default-600 mb-4">
                     Simple. Secure. Fast.
                   </p>
                   <p className="text-body text-default-600 leading-relaxed mb-4">
-                    Droply is your personal cloud storage solution for images. Upload, organize, and access your photos from anywhere with military-grade encryption. Perfect for photographers, designers, and anyone who values their digital memories.
+                    Droply is your personal cloud storage solution for images/files. Upload, organize, and access your photos from anywhere with military-grade encryption. Perfect for photographers, designers, and anyone who values their digital memories.
                   </p>
                   
         
